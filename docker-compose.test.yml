@@ -2,7 +2,7 @@ version: "3.6"
 
 services:
   sut:
-    image: damiantroy/radarr:${CACHE_TAG}
+    build: .
     volumes:
       - radarr_config:/config
     command: >

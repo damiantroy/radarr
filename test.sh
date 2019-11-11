@@ -60,15 +60,21 @@ fi
 
 # Check for expected string
 if [[ -n "${EXPECT}" ]]; then
-    curl -sS4 $URL |grep -q "${EXPECT}"
-    CURL_RESULT=$?
+    OUTPUT=$(mktemp)
+    if curl -sS4f $URL -o $OUTPUT; then
+        grep -q "${EXPECT}" $OUTPUT
+        CHECK_RESULT=$?
+    else
+        CHECK_RESULT=$?
+    fi
+    rm -f $OUTPUT
 else
     curl -sS4f $URL > /dev/null
-    CURL_RESULT=$?
+    CHECK_RESULT=$?
 fi
-if [[ ${CURL_RESULT} -ne 0 ]]; then
+if [[ ${CHECK_RESULT} -ne 0 ]]; then
     echo "*** Test failed: curl did not get an expected result"
-    exit ${CURL_RESULT}
+    exit ${CHECK_RESULT}
 fi
 
 

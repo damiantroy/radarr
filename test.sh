@@ -24,7 +24,7 @@ while getopts "t:u:e:" OPT; do
         t) TIMEOUT=$OPTARG ;;
         u) URL=$OPTARG ;;
         e) EXPECT=$OPTARG ;;
-        d) DEBUG="true"
+        d) DEBUG="true" ;;
         *) usage ;;
     esac
 done

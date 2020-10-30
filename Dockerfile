@@ -18,7 +18,6 @@ EXPOSE 7878
 RUN yum -y install epel-release && \
     yum -y install nmap-ncat jq mono-core mono-devel mono-locale-extras curl mediainfo && \
     yum clean all
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN URL=$(curl -s "https://api.github.com/repos/Radarr/Radarr/releases" |jq -r 'first( .[].assets[] | select( .name | endswith("linux.tar.gz") ).browser_download_url )') && \
     curl -sLo /tmp/Radarr.linux.tar.gz "$URL" && \
     tar xzf /tmp/Radarr.linux.tar.gz -C /opt && \

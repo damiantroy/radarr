@@ -1,6 +1,6 @@
 # Radarr Movie Manager CentOS Container
 
-This is a CentOS 7 container for [Radarr](https://radarr.video/), a movie collection manager for Usenet and BitTorrent users.
+This is a CentOS 8 container for [Radarr](https://radarr.video/), a movie collection manager for Usenet and BitTorrent users.
 
 ## Building
 
@@ -31,16 +31,16 @@ VIDEOS_DIR=/videos
 RADARR_CONFIG_DIR=/etc/config/radarr
 RADARR_IMAGE=localhost/radarr # Or damiantroy/radarr if deploying from docker.io
 
-sudo mkdir -p ${VIDEOS_DIR} ${RADARR_CONFIG_DIR}
-sudo chown -R ${PUID}:${PGID} ${VIDEOS_DIR} ${RADARR_CONFIG_DIR}
+sudo mkdir -p "${VIDEOS_DIR}" "${RADARR_CONFIG_DIR}"
+sudo chown -R "${PUID}:${PGID}" "${VIDEOS_DIR}" "${RADARR_CONFIG_DIR}"
 
 sudo podman run -d \
-    --pod video \
     --name=radarr \
-    -e PUID=${PUID} \
-    -e PGID=${PGID} \
-    -e TZ=${TZ} \
-    -v ${RADARR_CONFIG_DIR}:/config:Z \
-    -v ${VIDEOS_DIR}:/videos:z \
-    ${RADARR_IMAGE}
+    --network=host \
+    -e PUID="$PUID" \
+    -e PGID="$PGID" \
+    -e TZ="$TZ" \
+    -v "$RADARR_CONFIG_DIR:/config:Z" \
+    -v "$VIDEOS_DIR:/videos:z" \
+    "$RADARR_IMAGE"
 ```

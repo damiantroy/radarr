@@ -28,7 +28,7 @@ PUID=1001
 PGID=1001
 TZ=Australia/Melbourne
 VIDEOS_DIR=/videos
-RADARR_CONFIG_DIR=/etc/config/radarr
+RADARR_CONFIG_DIR=/etc/radarr
 RADARR_IMAGE=localhost/radarr # Or damiantroy/radarr if deploying from docker.io
 
 sudo mkdir -p "${VIDEOS_DIR}" "${RADARR_CONFIG_DIR}"

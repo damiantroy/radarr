@@ -22,7 +22,7 @@ RUN RELEASE=$(curl -s "https://radarr.servarr.com/v1/update/master/changes?os=li
     curl -sLo /tmp/Radarr.linux.tar.gz "https://radarr.servarr.com/v1/update/master/updatefile?version=${RELEASE}&os=linux&runtime=netcore&arch=x64" && \
     tar xzf /tmp/Radarr.linux.tar.gz -C /opt && \
     rm -f /tmp/Radarr.linux.tar.gz && \
-    chown -R ${PUID}:${PGID} /opt/Radarr
+    chown -R "$PUID:$PGID" /opt/Radarr
 
 # Runtime
 VOLUME /config /videos

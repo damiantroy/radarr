@@ -6,7 +6,7 @@ services:
     volumes:
       - radarr_config:/config
     command: >
-      bash -c "/usr/bin/mono --debug /opt/Radarr/Radarr.exe -nobrowser &
+      bash -c "/opt/Radarr/Radarr -nobrowser -data=/config &
                test.sh -t 30 -u http://localhost:7878/ -e Radarr"
 
 volumes:

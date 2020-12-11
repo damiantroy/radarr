@@ -20,7 +20,7 @@ build-nc: ## Build the container without cache.
 .PHONY: test
 test: ## Test the container.
 	$(CONTAINER_RUNTIME) run -it --rm "${APP_NAME}" \
-		bash -c "/usr/bin/mono --debug /opt/Radarr/Radarr.exe -nobrowser & \
+		bash -c "/opt/Radarr/Radarr -nobrowser -data=/config & \
 			   test.sh -t 30 -u http://localhost:7878/ -e Radarr"
 
 .PHONY: shell

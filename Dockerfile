@@ -15,7 +15,7 @@ COPY test.sh /usr/local/bin/
 
 # App
 RUN dnf -y install dnf-plugins-core epel-release && \
-    dnf -y install centos-repos && ls -l /etc/yum.repos.d/ && \
+    dnf repolist all && \
     dnf config-manager --set-enabled PowerTools && \
     dnf -y install nmap-ncat jq libicu mediainfo && \
     dnf clean all

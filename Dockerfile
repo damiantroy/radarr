@@ -15,8 +15,7 @@ COPY test.sh /usr/local/bin/
 
 # App
 RUN dnf -y install dnf-plugins-core epel-release && \
-    dnf repolist all && \
-    dnf config-manager --set-enabled PowerTools && \
+    (dnf config-manager --set-enabled PowerTools || dnf config-manager --set-enabled powertools) && \
     dnf -y install nmap-ncat jq libicu mediainfo && \
     dnf clean all
 RUN RELEASE=$(curl -s "https://radarr.servarr.com/v1/update/master/changes?os=linux" | jq -r '.[0].version') && \

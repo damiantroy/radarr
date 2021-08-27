@@ -1,4 +1,4 @@
-APP_NAME ?= radarr
+APP_NAME ?= damiantroy/radarr
 CONTAINER_RUNTIME := $(shell command -v podman 2> /dev/null || echo docker)
 
 .PHONY: help

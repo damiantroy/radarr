@@ -1,6 +1,6 @@
-# Radarr Movie Manager CentOS Container
+# Radarr Movie Manager Rocky Linux Container
 
-This is a CentOS 8 container for [Radarr](https://radarr.video/), a movie collection manager for Usenet and BitTorrent users.
+This is a Rocky Linux 8 container for [Radarr](https://radarr.video/), a movie collection manager for Usenet and BitTorrent users.
 
 ## Building
 

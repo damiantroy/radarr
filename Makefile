@@ -23,6 +23,10 @@ test: ## Test the container.
 		bash -c "/opt/Radarr/Radarr -nobrowser -data=/config & \
 			   test.sh -t 30 -u http://localhost:7878/ -e Radarr"
 
+.PHONY: push
+push: ## Publish the container on Docker Hub
+	$(CONTAINER_RUNTIME) push "${APP_NAME}"
+
 .PHONY: shell
 shell: ## Launce a shell in the container.
 	$(CONTAINER_RUNTIME) run -it --rm \

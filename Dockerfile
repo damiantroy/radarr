@@ -1,5 +1,5 @@
 # Base
-FROM centos:8
+FROM docker.io/rockylinux/rockylinux:8
 LABEL maintainer="Damian Troy <github@black.hole.com.au>"
 RUN dnf -y update && dnf clean all
 

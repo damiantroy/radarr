@@ -1,4 +1,6 @@
-APP_NAME ?= damiantroy/radarr
+REPO_NAME ?= damiantroy
+IMAGE_NAME ?= radarr
+APP_NAME := ${REPO_NAME}/${IMAGE_NAME}
 CONTAINER_RUNTIME := $(shell command -v podman 2> /dev/null || echo docker)
 
 .PHONY: help
@@ -22,6 +24,13 @@ test: ## Test the container.
 	$(CONTAINER_RUNTIME) run -it --rm "${APP_NAME}" \
 		bash -c "/opt/Radarr/Radarr -nobrowser -data=/config & \
 			   test.sh -t 30 -u http://localhost:7878/ -e Radarr"
+
+.PHONY: snyk-monitor
+snyk-monitor:
+	mkdir .snyk
+	$(CONTAINER_RUNTIME) save "${APP_NAME}" -o ".snyk/${IMAGE_NAME}"
+	snyk container monitor "docker-archive:.snyk/${IMAGE_NAME}" --file=Dockerfile
+	rm -rf .snyk
 
 .PHONY: push
 push: ## Publish the container on Docker Hub

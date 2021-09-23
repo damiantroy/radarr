@@ -1,5 +1,6 @@
 REPO_NAME ?= localhost
 IMAGE_NAME ?= radarr
+SNYK_TEMP ?= /var/tmp
 APP_NAME := ${REPO_NAME}/${IMAGE_NAME}
 CONTAINER_RUNTIME := $(shell command -v podman 2> /dev/null || echo docker)
 
@@ -27,11 +28,11 @@ test: ## Test the container.
 
 .PHONY: snyk-test
 snyk-test: ## Run 'snyk test' on the image.
-	./scripts/snyk-check.sh -c "${IMAGE_NAME}" -a "test" -p Dockerfile
+	./scripts/snyk-check.sh -c "${IMAGE_NAME}" -a "test" -p Dockerfile -t "${SNYK_TEMP}"
 
 .PHONY: snyk-monitor
 snyk-monitor: ## Run 'snyk monitor' on the image.
-	./scripts/snyk-check.sh -c "${IMAGE_NAME}" -a "monitor" -p Dockerfile
+	./scripts/snyk-check.sh -c "${IMAGE_NAME}" -a "monitor" -p Dockerfile -t "${SNYK_TEMP}"
 
 .PHONY: push
 push: ## Publish the container on Docker Hub

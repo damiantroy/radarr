@@ -18,7 +18,7 @@ ENV LANG=C.UTF-8
 COPY test.sh /usr/local/bin/
 
 # App
-RUN dnf -y install nmap-ncat jq libicu && \
+RUN dnf -y install nmap-ncat gzip jq libicu && \
     dnf clean all
 RUN curl -sLo /tmp/Radarr.master.linux-core-x64.tar.gz "http://radarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=x64" && \
     tar xzf /tmp/Radarr.master.linux-core-x64.tar.gz -C /opt && \

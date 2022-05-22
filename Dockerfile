@@ -1,6 +1,10 @@
 # Base
 FROM docker.io/rockylinux/rockylinux:8
 LABEL maintainer="Damian Troy <github@black.hole.com.au>"
+
+# https://github.com/rocky-linux/sig-cloud-instance-images/issues/22
+RUN chmod 1777 /tmp
+
 RUN dnf -y update && dnf clean all
 
 # Common
